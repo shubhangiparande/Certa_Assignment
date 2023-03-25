@@ -1,0 +1,78 @@
+{
+	"info": {
+		"_postman_id": "239c154c-3920-4268-aa22-63a082f36ae1",
+		"name": "certa",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24793295"
+	},
+	"item": [
+		{
+			"name": "https://samples.openweathermap.org/data/2.5/weather?q=London,uk&appid=b6 907d289e10d714a6e88b30761fae22",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Latitude and longitude are correct\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.coord.lat).to.eql(51.51);\r",
+							"    pm.expect(jsonData.coord.lon).to.eql(-0.13);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//Verify that temperature is in celsius not fahrenheit.\r",
+							"pm.test(\"Temperature is in Celsius\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.main.temp).to.be.within(-273, 100);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"// Verify that Response code is 200.\r",
+							"pm.test(\"Response code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"// Verify that city name is correct.\r",
+							"pm.test(\"City name is correct\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.name).to.eql(\"London\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://samples.openweathermap.org/data/2.5/weather?q=London,uk&appid=b6 907d289e10d714a6e88b30761fae22",
+					"protocol": "https",
+					"host": [
+						"samples",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "London,uk"
+						},
+						{
+							"key": "appid",
+							"value": "b6 907d289e10d714a6e88b30761fae22"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
